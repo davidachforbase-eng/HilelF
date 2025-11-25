@@ -1,0 +1,8 @@
+{
+  "name": "Hillel - The Cinematic Journey",
+  "description": "A high-performance, cinematic portfolio for a video editor featuring 3D scroll effects, glassmorphism, and interactive storytelling elements.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
