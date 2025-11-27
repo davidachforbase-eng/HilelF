@@ -10,6 +10,14 @@ const iconMap: Record<string, React.ReactNode> = {
   Headphones: <Headphones size={32} />,
 };
 
+// Map service IDs to actual video URLs (Using placeholders for demo)
+const videoMap: Record<number, string> = {
+    1: "https://videos.pexels.com/video-files/3205903/3205903-uhd_2560_1440_25fps.mp4", // Creative
+    2: "https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4", // Editing
+    3: "https://videos.pexels.com/video-files/852292/852292-hd_1920_1080_30fps.mp4", // Color
+    4: "https://videos.pexels.com/video-files/3756247/3756247-hd_1920_1080_25fps.mp4", // Sound
+};
+
 export const Services: React.FC = () => {
   return (
     <section className="py-32 bg-cinematic-dark relative">
@@ -31,11 +39,18 @@ export const Services: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="glass-panel p-8 rounded-2xl relative overflow-hidden group h-80 flex flex-col justify-between"
+              className="glass-panel p-8 rounded-2xl relative overflow-hidden group h-80 flex flex-col justify-between cursor-pointer"
             >
               {/* Background Video on Hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                  <img src={service.videoBg} className="w-full h-full object-cover" alt="bg" />
+                  <video 
+                    src={videoMap[service.id]} 
+                    className="w-full h-full object-cover" 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                  />
                   <div className="absolute inset-0 bg-black/50" />
               </div>
 

@@ -1,10 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { Play } from 'lucide-react';
 
 export const Showreel: React.FC = () => {
   const targetRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start end", "end start"],
@@ -13,17 +22,19 @@ export const Showreel: React.FC = () => {
   // Smooth scroll progress
   const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
   
-  // Transform vertical scroll to horizontal movement
-  // Adjust range: Needs to move enough to see all items. 
+  // Transform vertical scroll to horizontal movement (Desktop only)
   const x = useTransform(smoothProgress, [0.1, 0.9], ["20%", "-80%"]);
   
-  // Tunnel effects: Rotation and scale based on progress
+  // Tunnel effects: Rotation and scale based on progress (Desktop only)
   const rotateX = useTransform(smoothProgress, [0.2, 0.8], ["20deg", "-20deg"]);
   const scale = useTransform(smoothProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
 
   return (
-    <section ref={targetRef} className="h-[400vh] relative bg-cinematic-black">
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden perspective-1000">
+    <section 
+      ref={targetRef} 
+      className={`relative bg-cinematic-black ${isMobile ? 'h-auto py-20' : 'h-[400vh]'}`}
+    >
+      <div className={`${isMobile ? '' : 'sticky top-0 h-screen flex items-center overflow-hidden perspective-1000'}`}>
         
         <div className="absolute top-10 left-10 z-10">
             <h2 className="text-4xl md:text-6xl font-bold font-mono text-white/90">SELECTED WORKS</h2>
@@ -31,14 +42,14 @@ export const Showreel: React.FC = () => {
         </div>
 
         <motion.div 
-          style={{ x, rotateX, scale }}
-          className="flex gap-10 md:gap-20 px-20 items-center will-change-transform"
+          style={isMobile ? {} : { x, rotateX, scale }}
+          className={`${isMobile ? 'flex flex-col gap-10 mt-32 px-6' : 'flex gap-10 md:gap-20 px-20 items-center will-change-transform'}`}
         >
-          {PROJECTS.map((project, index) => (
+          {PROJECTS.map((project) => (
             <motion.div 
               key={project.id}
-              className="group relative flex-shrink-0 w-[80vw] md:w-[600px] aspect-video bg-cinematic-gray rounded-lg overflow-hidden border border-white/10 shadow-2xl cursor-none"
-              whileHover={{ scale: 1.05 }}
+              className={`group relative flex-shrink-0 aspect-video bg-cinematic-gray rounded-lg overflow-hidden border border-white/10 shadow-2xl cursor-none ${isMobile ? 'w-full' : 'w-[600px]'}`}
+              whileHover={isMobile ? {} : { scale: 1.05 }}
               transition={{ duration: 0.4 }}
             >
               <img 

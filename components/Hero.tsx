@@ -24,37 +24,40 @@ export const Hero: React.FC = () => {
             style={{ opacity: videoOpacity }}
             className="absolute inset-0 w-full h-full z-0"
         >
-            <img 
-                src="https://images.unsplash.com/photo-1478720568477-152d9b164e63?q=80&w=2500&auto=format&fit=crop" 
+            <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
                 className="w-full h-full object-cover grayscale brightness-75"
-                alt="Cinematic Background" 
-            />
+            >
+                <source src="https://videos.pexels.com/video-files/5804362/5804362-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+            </video>
             {/* Grain Overlay */}
             <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay"></div>
         </motion.div>
 
-        {/* Text Mask Container */}
-        <motion.div 
-          className="absolute inset-0 z-10 flex items-center justify-center bg-black mix-blend-multiply pointer-events-none"
-          style={{ opacity: textOpacity }}
-        >
-            {/* This div effectively masks the content below because of mix-blend-multiply with the white text below? 
-                Actually, simpler approach for reliable "text mask" in React without canvas:
-                Use a big white text on black background, and set mix-blend-mode: screen on the text layer over the video.
-            */}
-        </motion.div>
+        {/* Text Mask Container - Simulating 'Video inside text' via multiply blend mode */}
+        {/* We use a white background with black text (multiply) to cut out the text, 
+            or black background with white text (screen) depending on the desired effect. 
+            Here we use standard overlay for better compatibility. */}
         
-        <motion.h1 
+        <motion.div 
+            className="relative z-20 mix-blend-difference text-center"
             style={{ scale, opacity: textOpacity }}
-            className="text-[15vw] md:text-[12vw] font-black text-white mix-blend-difference z-20 whitespace-nowrap tracking-tighter"
         >
-            HILLEL <span className="text-cinematic-gold">MEDIA</span>
-        </motion.h1>
+            <h1 className="text-[15vw] md:text-[12vw] font-black text-white whitespace-nowrap tracking-tighter leading-none">
+                HILLEL
+            </h1>
+            <h2 className="text-[15vw] md:text-[5vw] font-black text-transparent bg-clip-text bg-gradient-to-b from-cinematic-gold to-yellow-800 tracking-[1vw]">
+                MEDIA
+            </h2>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div 
             style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-widest uppercase flex flex-col items-center gap-2"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-widest uppercase flex flex-col items-center gap-2 z-30"
         >
             <span>Scroll to Enter</span>
             <div className="w-[1px] h-12 bg-white/30">
