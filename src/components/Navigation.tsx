@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-export const Navigation: React.FC = () => {
+interface NavigationProps {
+  onOpenGallery: () => void;
+  onOpenProcess: () => void;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({ onOpenGallery, onOpenProcess }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -14,21 +19,27 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  const handleLinkClick = (id: string) => {
+    if (id === 'gallery') {
+        onOpenGallery();
+    } else if (id === 'process-modal') {
+        onOpenProcess();
+    } else {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
     }
+    setIsMobileMenuOpen(false);
   };
 
   const navLinks = [
-    { name: 'WORK', id: 'work' },
-    { name: 'ABOUT', id: 'about' },
-    { name: 'SERVICES', id: 'services' },
-    { name: 'PRICING', id: 'pricing' },
-    { name: 'PROCESS', id: 'process' },
-    { name: 'CONTACT', id: 'contact' },
+    { name: 'WORK', id: 'work', action: false },
+    { name: 'GALLERY', id: 'gallery', action: true },
+    { name: 'ABOUT', id: 'about', action: false },
+    { name: 'SERVICES', id: 'services', action: false },
+    { name: 'PROCESS', id: 'process-modal', action: true },
+    { name: 'CONTACT', id: 'contact', action: false },
   ];
 
   return (
@@ -56,7 +67,7 @@ export const Navigation: React.FC = () => {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleLinkClick(link.id)}
                 className="text-sm font-mono font-bold text-white/70 hover:text-white hover:text-cinematic-gold transition-colors tracking-widest relative group"
               >
                 {link.name}
@@ -88,7 +99,7 @@ export const Navigation: React.FC = () => {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleLinkClick(link.id)}
                 className="text-3xl font-black text-white hover:text-cinematic-gold tracking-tighter"
               >
                 {link.name}

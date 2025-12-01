@@ -30,6 +30,30 @@ export const PROJECTS: Project[] = [
     title: "ETHEREAL",
     category: "Fashion",
     image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    id: 6,
+    title: "DEEP DIVE",
+    category: "Underwater",
+    image: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    id: 7,
+    title: "CYBER PUNK",
+    category: "VFX Short",
+    image: "https://images.unsplash.com/photo-1515630278258-407f66498911?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    id: 8,
+    title: "GOLDEN HOUR",
+    category: "Lifestyle",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1600&auto=format&fit=crop",
+  },
+  {
+    id: 9,
+    title: "APEX",
+    category: "Sports",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1600&auto=format&fit=crop",
   }
 ];
 

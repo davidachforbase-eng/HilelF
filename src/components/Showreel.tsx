@@ -1,9 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { PROJECTS } from '../constants';
-import { Play } from 'lucide-react';
+import { Play, Grid } from 'lucide-react';
 
-export const Showreel: React.FC = () => {
+interface ShowreelProps {
+    onOpenGallery: () => void;
+}
+
+export const Showreel: React.FC<ShowreelProps> = ({ onOpenGallery }) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,9 +24,12 @@ export const Showreel: React.FC = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
-  const x = useTransform(smoothProgress, [0.1, 0.9], ["20%", "-80%"]);
+  const x = useTransform(smoothProgress, [0.1, 0.9], ["20%", "-100%"]);
   const rotateX = useTransform(smoothProgress, [0.2, 0.8], ["20deg", "-20deg"]);
   const scale = useTransform(smoothProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
+
+  // Take only first 5 for the reel, show full gallery on click
+  const reelProjects = PROJECTS.slice(0, 5);
 
   return (
     <section 
@@ -41,7 +48,7 @@ export const Showreel: React.FC = () => {
           style={isMobile ? {} : { x, rotateX, scale }}
           className={`${isMobile ? 'flex flex-col gap-10 mt-32 px-6' : 'flex gap-10 md:gap-20 px-20 items-center will-change-transform'}`}
         >
-          {PROJECTS.map((project) => (
+          {reelProjects.map((project) => (
             <motion.div 
               key={project.id}
               className={`group relative flex-shrink-0 aspect-video bg-cinematic-gray rounded-lg overflow-hidden border border-white/10 shadow-2xl cursor-none ${isMobile ? 'w-full' : 'w-[600px]'}`}
@@ -73,6 +80,19 @@ export const Showreel: React.FC = () => {
               </div>
             </motion.div>
           ))}
+
+          {/* View All Card */}
+          <motion.div 
+            className={`flex-shrink-0 bg-cinematic-gray/50 border border-white/20 rounded-lg flex items-center justify-center cursor-pointer group hover:bg-cinematic-gold hover:text-black transition-colors ${isMobile ? 'w-full h-48' : 'w-[300px] h-[338px]'}`}
+            onClick={onOpenGallery}
+            whileHover={{ scale: 1.05 }}
+          >
+              <div className="text-center">
+                  <Grid size={48} className="mx-auto mb-4 opacity-50 group-hover:opacity-100" />
+                  <span className="text-xl font-bold tracking-widest uppercase">View All<br/>Works</span>
+              </div>
+          </motion.div>
+
         </motion.div>
       </div>
     </section>

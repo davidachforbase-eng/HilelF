@@ -16,33 +16,46 @@ import { CtaBreak } from './components/CtaBreak';
 import { Contact } from './components/Contact';
 import { Socials } from './components/Socials';
 import { Footer } from './components/Footer';
+import { GalleryOverlay } from './components/GalleryOverlay';
+import { ProcessModal } from './components/ProcessModal';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isProcessOpen, setIsProcessOpen] = useState(false);
 
-  // Lock body scroll during loading
+  // Lock body scroll during loading or when modals are open
   useEffect(() => {
-    if (loading) {
+    if (loading || isGalleryOpen || isProcessOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [loading]);
+  }, [loading, isGalleryOpen, isProcessOpen]);
 
   return (
     <>
         <CustomCursor />
         <ScrollProgress />
+        
         {loading && <Preloader onComplete={() => setLoading(false)} />}
         
+        {/* Overlays */}
+        <GalleryOverlay isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />
+        <ProcessModal isOpen={isProcessOpen} onClose={() => setIsProcessOpen(false)} />
+
         <main className={`transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-            <Navigation />
+            <Navigation 
+                onOpenGallery={() => setIsGalleryOpen(true)} 
+                onOpenProcess={() => setIsProcessOpen(true)}
+            />
             <Hero />
-            <Showreel />
+            <Showreel onOpenGallery={() => setIsGalleryOpen(true)} />
             <About />
             <TechStack />
             <Services />
             <Pricing />
+            {/* Kept on-page process as a summary, modal is deep dive */}
             <Process />
             <Testimonials />
             <FAQ />
