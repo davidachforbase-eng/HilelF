@@ -24,8 +24,9 @@ export const About: React.FC = () => {
                     </div>
                     
                     <div className="relative aspect-[3/4] bg-gray-800 mb-4 overflow-hidden border-2 border-white/20">
+                         {/* Make sure to put hillel.jpg in the public folder */}
                          <img 
-                            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop" 
+                            src="/hillel.jpg" 
                             alt="Hillel" 
                             className="w-full h-full object-cover grayscale contrast-125"
                         />
