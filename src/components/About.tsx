@@ -24,9 +24,9 @@ export const About: React.FC = () => {
                     </div>
                     
                     <div className="relative aspect-[3/4] bg-gray-800 mb-4 overflow-hidden border-2 border-white/20">
-                         {/* Image source pointing to public/hillel.jpg */}
+                         {/* Image source pointing to public/hillel.jpeg */}
                          <img 
-                            src="/hillel.jpg" 
+                            src="/hillel.jpeg" 
                             alt="Hillel" 
                             className="w-full h-full object-cover grayscale contrast-125"
                         />
