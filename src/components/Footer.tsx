@@ -1,44 +1,60 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-genz-black text-white pt-20 pb-4 z-0 flex flex-col justify-end min-h-[80vh]">
-        <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 font-mono text-sm uppercase tracking-widest">
+    <footer className="relative bg-genz-pink pt-20 pb-4 overflow-hidden">
+        {/* Animated Wavy Top Border (Simulated with CSS clip-path or simple div for now to keep it robust) */}
+        <div className="absolute top-0 left-0 w-full h-8 bg-black skew-y-1"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-black">
                 <div>
-                    <h4 className="text-genz-neon mb-4 font-black">Menu</h4>
-                    <ul className="space-y-2 text-gray-500">
-                        <li><a href="#work" className="hover:text-white hover:pl-2 transition-all">Work</a></li>
-                        <li><a href="#about" className="hover:text-white hover:pl-2 transition-all">Player 1</a></li>
-                        <li><a href="#pricing" className="hover:text-white hover:pl-2 transition-all">Shop</a></li>
+                    <h4 className="font-black text-2xl mb-6 uppercase border-b-4 border-black inline-block">SITEMAP</h4>
+                    <ul className="space-y-2 font-mono font-bold text-xl uppercase">
+                        <li><a href="#work" className="hover:text-white hover:translate-x-2 transition-transform inline-block">Work</a></li>
+                        <li><a href="#services" className="hover:text-white hover:translate-x-2 transition-transform inline-block">Services</a></li>
+                        <li><a href="#about" className="hover:text-white hover:translate-x-2 transition-transform inline-block">About</a></li>
                     </ul>
                 </div>
+                
                 <div>
-                    <h4 className="text-genz-neon mb-4 font-black">Socials</h4>
-                    <ul className="space-y-2 text-gray-500">
-                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">TikTok</a></li>
-                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">Instagram</a></li>
-                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">YouTube</a></li>
-                    </ul>
+                    <h4 className="font-black text-2xl mb-6 uppercase border-b-4 border-black inline-block">CONNECT</h4>
+                    <div className="flex flex-col gap-4">
+                        {['TIKTOK', 'INSTAGRAM', 'YOUTUBE'].map(social => (
+                            <a key={social} href="#" className="bg-black text-white py-2 px-4 font-black uppercase text-center hover:bg-white hover:text-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                                {social}
+                            </a>
+                        ))}
+                    </div>
                 </div>
-                <div className="col-span-2 text-right">
-                    <h4 className="text-genz-neon mb-4 font-black">Contact</h4>
-                    <a href="mailto:hello@hillel.media" className="text-2xl md:text-4xl font-black hover:text-genz-pink transition-colors">
-                        HELLO@HILLEL.MEDIA
+
+                <div className="md:text-right">
+                    <h4 className="font-black text-2xl mb-6 uppercase border-b-4 border-black inline-block">CONTACT</h4>
+                    <a href="mailto:hello@hillel.media" className="block text-3xl md:text-4xl font-black break-words hover:text-white transition-colors leading-none">
+                        HELLO@<br/>HILLEL.MEDIA
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div className="border-t-4 border-white/10 pt-4 flex justify-between items-end">
-                <h1 className="text-[14vw] leading-[0.8] font-black tracking-tighter text-white/5 select-none pointer-events-none">
-                    GAME OVER
-                </h1>
-                <div className="text-xs font-mono text-gray-600 mb-4 text-right hidden md:block">
-                    © {new Date().getFullYear()} HILLEL MEDIA INC.<br/>
-                    ALL RIGHTS RESERVED.<br/>
-                    LEVEL 2024
-                </div>
-            </div>
+        {/* Massive Scrolling Text */}
+        <div className="border-y-4 border-black bg-white py-4 overflow-hidden flex relative z-10">
+            <motion.div 
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="flex whitespace-nowrap gap-8"
+            >
+                {[...Array(10)].map((_, i) => (
+                    <span key={i} className="text-8xl md:text-[10rem] font-black leading-none text-black">
+                        GAME OVER <span className="text-genz-pink text-stroke-black">INSERT COIN</span>
+                    </span>
+                ))}
+            </motion.div>
+        </div>
+
+        <div className="bg-black text-white text-center py-2 font-mono text-xs uppercase">
+            © {new Date().getFullYear()} Hillel Media. All Rights Reserved. Level 1 Complete.
         </div>
     </footer>
   );
