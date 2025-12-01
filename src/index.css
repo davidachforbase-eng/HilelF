@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #050505;
+  background-color: #0a0a0a;
   color: #ffffff;
   cursor: none; /* Hide default cursor for custom one */
   overflow-x: hidden;
@@ -27,4 +27,9 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::selection {
+  background-color: #D4AF37;
+  color: #000000;
 }

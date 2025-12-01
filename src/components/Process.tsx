@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export const Process: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [sliderPosition, setSliderPosition] = useState(50);
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +29,7 @@ export const Process: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-cinematic-black relative overflow-hidden">
+    <section id="process" className="py-32 bg-cinematic-black relative overflow-hidden">
       <div className="container mx-auto px-6">
         
         {/* Header */}

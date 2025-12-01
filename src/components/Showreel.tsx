@@ -19,18 +19,14 @@ export const Showreel: React.FC = () => {
     offset: ["start end", "end start"],
   });
 
-  // Smooth scroll progress
   const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
-  
-  // Transform vertical scroll to horizontal movement (Desktop only)
   const x = useTransform(smoothProgress, [0.1, 0.9], ["20%", "-80%"]);
-  
-  // Tunnel effects: Rotation and scale based on progress (Desktop only)
   const rotateX = useTransform(smoothProgress, [0.2, 0.8], ["20deg", "-20deg"]);
   const scale = useTransform(smoothProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
 
   return (
     <section 
+      id="work"
       ref={targetRef} 
       className={`relative bg-cinematic-black ${isMobile ? 'h-auto py-20' : 'h-[400vh]'}`}
     >

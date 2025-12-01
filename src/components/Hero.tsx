@@ -37,8 +37,7 @@ export const Hero: React.FC = () => {
             <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay"></div>
         </motion.div>
 
-        {/* Text Mask Container - Simulating 'Video inside text' via multiply blend mode */}
-        
+        {/* Text Mask Container */}
         <motion.div 
             className="relative z-20 mix-blend-difference text-center"
             style={{ scale, opacity: textOpacity }}
