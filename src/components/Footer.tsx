@@ -2,45 +2,60 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-white pt-20 pb-10 border-t border-white/10 text-sm">
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            
-            {/* Column 1: Brand */}
-            <div>
-                <div className="text-3xl font-black tracking-tighter mb-6 flex items-center gap-2">
-                    <span>HILLEL</span>
-                    <span className="w-2 h-2 rounded-full bg-cinematic-red"></span>
+    <footer className="fixed bottom-0 left-0 w-full h-screen bg-cinematic-black flex flex-col justify-between z-0 pt-32 pb-10 px-6">
+        {/* Background Texture */}
+        <div className="absolute inset-0 bg-noise opacity-10 pointer-events-none" />
+
+        <div className="container mx-auto flex-grow flex flex-col justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 className="text-[12vw] leading-[0.8] font-black tracking-tighter text-white/10 select-none">
+                        HILLEL
+                        <br/>
+                        MEDIA
+                    </h2>
                 </div>
-                <p className="text-gray-400 leading-relaxed max-w-xs">
-                    Crafting visual narratives that resonate. Specialized in high-end video editing, color grading, and motion graphics.
-                </p>
-            </div>
-
-            {/* Column 2: Quick Links */}
-            <div>
-                <h4 className="font-mono text-cinematic-gold uppercase tracking-widest mb-6">Explore</h4>
-                <ul className="space-y-4">
-                    <li><a href="#work" className="text-gray-400 hover:text-white transition-colors">Selected Work</a></li>
-                    <li><a href="#services" className="text-gray-400 hover:text-white transition-colors">Services</a></li>
-                    <li><a href="#process" className="text-gray-400 hover:text-white transition-colors">The Process</a></li>
-                    <li><a href="#contact" className="text-gray-400 hover:text-white transition-colors">Start a Project</a></li>
-                </ul>
-            </div>
-
-            {/* Column 3: Contact Info */}
-            <div>
-                <h4 className="font-mono text-cinematic-gold uppercase tracking-widest mb-6">Contact</h4>
-                <ul className="space-y-4 text-gray-400">
-                    <li>hello@hillel.media</li>
-                    <li>+972 50 123 4567</li>
-                    <li>Tel Aviv, Israel</li>
-                </ul>
+                
+                <div className="flex flex-col justify-end h-full gap-12">
+                     <div className="grid grid-cols-2 gap-8 text-sm font-mono uppercase tracking-widest">
+                        <div>
+                            <h3 className="text-cinematic-gold mb-4">Socials</h3>
+                            <ul className="space-y-2 text-gray-500">
+                                <li><a href="#" className="hover:text-white">Instagram</a></li>
+                                <li><a href="#" className="hover:text-white">Twitter</a></li>
+                                <li><a href="#" className="hover:text-white">LinkedIn</a></li>
+                                <li><a href="#" className="hover:text-white">Vimeo</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-cinematic-gold mb-4">Menu</h3>
+                            <ul className="space-y-2 text-gray-500">
+                                <li><a href="#work" className="hover:text-white">Work</a></li>
+                                <li><a href="#about" className="hover:text-white">About</a></li>
+                                <li><a href="#contact" className="hover:text-white">Contact</a></li>
+                            </ul>
+                        </div>
+                     </div>
+                     
+                     <div className="text-right">
+                        <a href="mailto:hello@hillel.media" className="text-2xl md:text-4xl font-bold hover:text-cinematic-gold transition-colors underline decoration-1 underline-offset-8 decoration-white/20">
+                            hello@hillel.media
+                        </a>
+                     </div>
+                </div>
             </div>
         </div>
 
-        <div className="container mx-auto px-6 pt-8 border-t border-white/5 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-white/30 font-mono text-xs">
-            <p>&copy; {new Date().getFullYear()} HILLEL MEDIA. All Rights Reserved.</p>
-            <p>Designed for Impact.</p>
+        <div className="container mx-auto flex justify-between items-end border-t border-white/10 pt-8 text-xs font-mono text-gray-600">
+            <div>
+                &copy; {new Date().getFullYear()} HILLEL MEDIA
+            </div>
+            <div>
+                TEL AVIV &bull; NYC &bull; LDN
+            </div>
+            <div>
+                SCROLL TO TOP
+            </div>
         </div>
     </footer>
   );

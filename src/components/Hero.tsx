@@ -8,76 +8,93 @@ export const Hero: React.FC = () => {
     offset: ["start start", "end start"]
   });
 
-  // Expand text scale: starts at 1, goes massive
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 50]);
-  // Opacity for the "fill" video to reveal fully
-  const videoOpacity = useTransform(scrollYProgress, [0.3, 0.4], [0.4, 1]);
-  // Fade out the text overlay itself when it gets too big
-  const textOpacity = useTransform(scrollYProgress, [0.3, 0.4], [1, 0]);
-  
-  // Parallax text movement
-  const yText = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   return (
-    <div ref={containerRef} className="h-[200vh] relative">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-        
-        {/* Background Video (Initially Dim) */}
-        <motion.div 
-            style={{ opacity: videoOpacity }}
-            className="absolute inset-0 w-full h-full z-0"
-        >
-            <video 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover grayscale brightness-75 scale-105"
-            >
-                <source src="https://videos.pexels.com/video-files/5804362/5804362-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-            </video>
-            {/* Grain Overlay handled globally now, but adding specific overlay here for texture */}
-            <div className="absolute inset-0 bg-black/20 mix-blend-overlay"></div>
-        </motion.div>
-
-        {/* Text Mask Container */}
-        <motion.div 
-            className="relative z-20 mix-blend-difference text-center"
-            style={{ scale, opacity: textOpacity, y: yText }}
-        >
-            <motion.h1 
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                className="text-[15vw] md:text-[12vw] font-black text-white whitespace-nowrap tracking-tighter leading-none"
-            >
-                HILLEL
-            </motion.h1>
-            <motion.h2 
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-                className="text-[15vw] md:text-[5vw] font-black text-transparent bg-clip-text bg-gradient-to-b from-cinematic-gold to-yellow-800 tracking-[1vw]"
-            >
-                MEDIA
-            </motion.h2>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-            style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-widest uppercase flex flex-col items-center gap-2 z-30 mix-blend-difference"
-        >
-            <span>Scroll to Enter</span>
-            <div className="w-[1px] h-12 bg-white/30">
-                <motion.div 
-                    animate={{ y: [0, 48, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-1/2 bg-white"
-                />
-            </div>
-        </motion.div>
+    <div ref={containerRef} className="min-h-screen relative flex items-center justify-center overflow-hidden bg-genz-black pt-20">
+      
+      {/* Background Chaos */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
+        <motion.div style={{ y: y1 }} className="absolute -top-20 -left-20 w-96 h-96 bg-genz-neon rounded-full blur-[100px]" />
+        <motion.div style={{ y: y2 }} className="absolute bottom-0 right-0 w-96 h-96 bg-genz-pink rounded-full blur-[100px]" />
       </div>
+
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        
+        <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.5 }}
+        >
+            <h2 className="text-xl md:text-3xl font-mono font-bold text-genz-neon tracking-widest mb-4 bg-black/50 inline-block px-4 py-2 border border-genz-neon rounded-full transform -rotate-2">
+                ATTENTION ARCHITECT
+            </h2>
+        </motion.div>
+
+        <h1 className="text-[15vw] leading-[0.8] font-black text-white mix-blend-normal">
+            <motion.span 
+                className="block text-outline hover:text-genz-pink transition-colors cursor-default"
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+            >
+                STOP
+            </motion.span>
+            <motion.span 
+                className="block text-white"
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+            >
+                THE
+            </motion.span>
+            <motion.span 
+                className="block text-genz-neon drop-shadow-[0_0_15px_rgba(204,255,0,0.8)]"
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+            >
+                SCROLL
+            </motion.span>
+        </h1>
+
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-12 flex flex-col md:flex-row justify-center items-center gap-6"
+        >
+            <a href="#contact" className="px-8 py-4 bg-genz-pink text-white font-black text-xl uppercase tracking-wider hover:bg-white hover:text-black hover:shadow-[8px_8px_0px_#00FFFF] transition-all transform hover:-translate-y-1 border-2 border-transparent">
+                Go Viral Now
+            </a>
+            <p className="font-mono text-gray-400 text-sm md:max-w-xs text-left">
+                We craft short-form content that hacks attention spans and prints ROI.
+            </p>
+        </motion.div>
+
+      </div>
+      
+      {/* Floating Elements */}
+      <motion.div 
+        animate={{ y: [0, -20, 0] }} 
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 right-[10%] hidden lg:block"
+      >
+        <div className="bg-white text-black font-black p-4 rotate-12 shadow-brutal border-2 border-black">
+            +500% VIEWS 🚀
+        </div>
+      </motion.div>
+
+      <motion.div 
+        animate={{ y: [0, 20, 0] }} 
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-1/4 left-[10%] hidden lg:block"
+      >
+        <div className="bg-genz-blue text-black font-black p-4 -rotate-6 shadow-brutal border-2 border-black">
+            HIGH RETENTION 👁️
+        </div>
+      </motion.div>
     </div>
   );
 };

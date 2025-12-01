@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
 import { PROJECTS } from '../constants';
+import { ParallaxImage } from './ParallaxImage';
 
 interface GalleryOverlayProps {
   isOpen: boolean;
@@ -39,16 +40,18 @@ export const GalleryOverlay: React.FC<GalleryOverlayProps> = ({ isOpen, onClose 
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="group relative aspect-[4/3] overflow-hidden rounded-md cursor-pointer"
+                        className="group relative aspect-[4/3] rounded-md cursor-pointer overflow-hidden"
                     >
-                        <img 
+                        {/* Parallax Image Component */}
+                        <ParallaxImage 
                             src={project.image} 
                             alt={project.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                            className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
                         />
-                        <div className="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-colors duration-500" />
                         
-                        <div className="absolute bottom-0 left-0 w-full p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                        
+                        <div className="absolute bottom-0 left-0 w-full p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 z-20">
                             <span className="text-cinematic-gold text-xs font-mono uppercase tracking-widest">{project.category}</span>
                             <div className="flex justify-between items-end mt-2">
                                 <h3 className="text-2xl font-bold text-white uppercase italic">{project.title}</h3>

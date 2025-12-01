@@ -1,99 +1,65 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { PROJECTS } from '../constants';
-import { Play, Grid } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 interface ShowreelProps {
     onOpenGallery: () => void;
 }
 
 export const Showreel: React.FC<ShowreelProps> = ({ onOpenGallery }) => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start end", "end start"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { damping: 20, stiffness: 100 });
-  const x = useTransform(smoothProgress, [0.1, 0.9], ["20%", "-100%"]);
-  const rotateX = useTransform(smoothProgress, [0.2, 0.8], ["20deg", "-20deg"]);
-  const scale = useTransform(smoothProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
-
-  // Take only first 5 for the reel, show full gallery on click
-  const reelProjects = PROJECTS.slice(0, 5);
-
   return (
-    <section 
-      id="work"
-      ref={targetRef} 
-      className={`relative bg-cinematic-black ${isMobile ? 'h-auto py-20' : 'h-[400vh]'}`}
-    >
-      <div className={`${isMobile ? '' : 'sticky top-0 h-screen flex items-center overflow-hidden perspective-1000'}`}>
+    <section id="work" className="py-20 bg-genz-black border-t border-white/10">
+      <div className="container mx-auto px-6">
         
-        <div className="absolute top-10 left-10 z-10">
-            <h2 className="text-4xl md:text-6xl font-bold font-mono text-white/90">SELECTED WORKS</h2>
-            <div className="w-20 h-1 bg-cinematic-red mt-4"></div>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+                <h2 className="text-6xl md:text-8xl font-black text-white mb-2 leading-none">
+                    THE <span className="text-genz-neon">FEED</span>
+                </h2>
+                <p className="font-mono text-gray-400 text-lg">Results that speak for themselves.</p>
+            </div>
+            <button 
+                onClick={onOpenGallery}
+                className="text-white font-bold underline decoration-genz-pink decoration-4 underline-offset-4 hover:bg-genz-pink hover:no-underline px-4 py-2 transition-all"
+            >
+                VIEW FULL ARCHIVE ↗
+            </button>
         </div>
 
-        <motion.div 
-          style={isMobile ? {} : { x, rotateX, scale }}
-          className={`${isMobile ? 'flex flex-col gap-10 mt-32 px-6' : 'flex gap-10 md:gap-20 px-20 items-center will-change-transform'}`}
-        >
-          {reelProjects.map((project) => (
-            <motion.div 
-              key={project.id}
-              className={`group relative flex-shrink-0 aspect-video bg-cinematic-gray rounded-lg overflow-hidden border border-white/10 shadow-2xl cursor-none ${isMobile ? 'w-full' : 'w-[600px]'}`}
-              whileHover={isMobile ? {} : { scale: 1.05 }}
-              transition={{ duration: 0.4 }}
-            >
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-              
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <span className="text-cinematic-gold text-sm font-mono tracking-widest uppercase mb-2 block">
-                    {project.category}
-                </span>
-                <h3 className="text-4xl font-bold uppercase italic">{project.title}</h3>
-              </div>
+        {/* Masonry-ish Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {PROJECTS.map((project, i) => (
+                <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -10, rotate: i % 2 === 0 ? 2 : -2 }}
+                    className="relative aspect-[9/16] bg-gray-900 rounded-2xl overflow-hidden border-2 border-white/10 group cursor-pointer shadow-none hover:shadow-neon hover:border-genz-neon transition-all duration-300"
+                >
+                    <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
+                    />
+                    
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
+                    
+                    <div className="absolute bottom-0 left-0 p-6 w-full">
+                        <div className="bg-genz-pink text-white text-xs font-bold px-2 py-1 inline-block mb-2 rounded-sm uppercase transform -rotate-2">
+                            {project.category}
+                        </div>
+                        <h3 className="text-3xl font-black uppercase italic leading-none">{project.title}</h3>
+                    </div>
 
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center">
-                    <Play fill="white" className="ml-1" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform scale-50 group-hover:scale-100">
+                        <Play fill="white" size={24} />
+                    </div>
+                </motion.div>
+            ))}
+        </div>
 
-          {/* View All Card */}
-          <motion.div 
-            className={`flex-shrink-0 bg-cinematic-gray/50 border border-white/20 rounded-lg flex items-center justify-center cursor-pointer group hover:bg-cinematic-gold hover:text-black transition-colors ${isMobile ? 'w-full h-48' : 'w-[300px] h-[338px]'}`}
-            onClick={onOpenGallery}
-            whileHover={{ scale: 1.05 }}
-          >
-              <div className="text-center">
-                  <Grid size={48} className="mx-auto mb-4 opacity-50 group-hover:opacity-100" />
-                  <span className="text-xl font-bold tracking-widest uppercase">View All<br/>Works</span>
-              </div>
-          </motion.div>
-
-        </motion.div>
       </div>
     </section>
   );
