@@ -38,27 +38,39 @@ export const CustomCursor: React.FC = () => {
     <>
       {/* Main Reticle */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] rounded-full border border-white mix-blend-difference hidden md:block backdrop-invert"
+        className="fixed top-0 left-0 w-4 h-4 pointer-events-none z-[9999] rounded-full border border-white bg-white/50 mix-blend-difference hidden md:block backdrop-invert"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
           translateX: "-50%",
           translateY: "-50%",
-          scale: isHovering ? 1.5 : 1
+          scale: isHovering ? 2.5 : 1
         }}
-      >
-         {/* Crosshair lines */}
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-white rounded-full box-content border-2 border-black" />
-      </motion.div>
+      />
       
-      {/* Trailing Spotlight Glow - Brightness Increased */}
+      {/* Strong Flashlight Glow */}
       <motion.div
-         className="fixed top-0 left-0 w-96 h-96 pointer-events-none z-[9998] rounded-full bg-white/15 blur-[80px] hidden md:block mix-blend-overlay"
+         className="fixed top-0 left-0 w-[600px] h-[600px] pointer-events-none z-[9998] rounded-full hidden md:block mix-blend-screen"
          style={{
             x: cursorX,
             y: cursorY,
             translateX: "-50%",
             translateY: "-50%",
+            background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0) 70%)",
+            filter: "blur(20px)"
+         }}
+      />
+      
+      {/* Core Hotspot for extra intensity */}
+      <motion.div
+         className="fixed top-0 left-0 w-[150px] h-[150px] pointer-events-none z-[9998] rounded-full hidden md:block mix-blend-screen"
+         style={{
+            x: cursorX,
+            y: cursorY,
+            translateX: "-50%",
+            translateY: "-50%",
+            background: "radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)",
+            filter: "blur(30px)"
          }}
       />
     </>
