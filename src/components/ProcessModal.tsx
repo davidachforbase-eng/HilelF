@@ -47,16 +47,16 @@ export const ProcessModal: React.FC<ProcessModalProps> = ({ isOpen, onClose }) =
                 </div>
 
                 <div className="space-y-4 bg-white border border-black p-4 text-sm h-64 overflow-y-auto shadow-inner">
-                    <p className="font-bold">> INIT_PHASE_1: THE_HOOK</p>
+                    <p className="font-bold">&gt; INIT_PHASE_1: THE_HOOK</p>
                     <p className="pl-4 text-gray-700">Analyzing trends. Injecting dopamine triggers. Cutting silence. Target: 3-second retention.</p>
                     
-                    <p className="font-bold mt-4">> INIT_PHASE_2: PACING</p>
+                    <p className="font-bold mt-4">&gt; INIT_PHASE_2: PACING</p>
                     <p className="pl-4 text-gray-700">Removing dead air. Adding SFX layers. Visual overload initiated.</p>
 
-                    <p className="font-bold mt-4">> INIT_PHASE_3: CONVERSION</p>
+                    <p className="font-bold mt-4">&gt; INIT_PHASE_3: CONVERSION</p>
                     <p className="pl-4 text-gray-700">Deploying CTA. Optimizing for algorithm. Launching content.</p>
 
-                    <p className="text-green-600 font-bold mt-4">> SUCCESS: ROI_DETECTED</p>
+                    <p className="text-green-600 font-bold mt-4">&gt; SUCCESS: ROI_DETECTED</p>
                 </div>
 
                 <div className="mt-6 flex justify-center gap-4">
