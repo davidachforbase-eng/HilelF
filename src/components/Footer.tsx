@@ -2,59 +2,42 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="fixed bottom-0 left-0 w-full h-screen bg-cinematic-black flex flex-col justify-between z-0 pt-32 pb-10 px-6">
-        {/* Background Texture */}
-        <div className="absolute inset-0 bg-noise opacity-10 pointer-events-none" />
-
-        <div className="container mx-auto flex-grow flex flex-col justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <footer className="fixed bottom-0 left-0 w-full bg-genz-black text-white pt-20 pb-4 z-0 flex flex-col justify-end min-h-[80vh]">
+        <div className="container mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 font-mono text-sm uppercase tracking-widest">
                 <div>
-                    <h2 className="text-[12vw] leading-[0.8] font-black tracking-tighter text-white/10 select-none">
-                        HILLEL
-                        <br/>
-                        MEDIA
-                    </h2>
+                    <h4 className="text-genz-neon mb-4 font-black">Menu</h4>
+                    <ul className="space-y-2 text-gray-500">
+                        <li><a href="#work" className="hover:text-white hover:pl-2 transition-all">Work</a></li>
+                        <li><a href="#about" className="hover:text-white hover:pl-2 transition-all">Player 1</a></li>
+                        <li><a href="#pricing" className="hover:text-white hover:pl-2 transition-all">Shop</a></li>
+                    </ul>
                 </div>
-                
-                <div className="flex flex-col justify-end h-full gap-12">
-                     <div className="grid grid-cols-2 gap-8 text-sm font-mono uppercase tracking-widest">
-                        <div>
-                            <h3 className="text-cinematic-gold mb-4">Socials</h3>
-                            <ul className="space-y-2 text-gray-500">
-                                <li><a href="#" className="hover:text-white">Instagram</a></li>
-                                <li><a href="#" className="hover:text-white">Twitter</a></li>
-                                <li><a href="#" className="hover:text-white">LinkedIn</a></li>
-                                <li><a href="#" className="hover:text-white">Vimeo</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-cinematic-gold mb-4">Menu</h3>
-                            <ul className="space-y-2 text-gray-500">
-                                <li><a href="#work" className="hover:text-white">Work</a></li>
-                                <li><a href="#about" className="hover:text-white">About</a></li>
-                                <li><a href="#contact" className="hover:text-white">Contact</a></li>
-                            </ul>
-                        </div>
-                     </div>
-                     
-                     <div className="text-right">
-                        <a href="mailto:hello@hillel.media" className="text-2xl md:text-4xl font-bold hover:text-cinematic-gold transition-colors underline decoration-1 underline-offset-8 decoration-white/20">
-                            hello@hillel.media
-                        </a>
-                     </div>
+                <div>
+                    <h4 className="text-genz-neon mb-4 font-black">Socials</h4>
+                    <ul className="space-y-2 text-gray-500">
+                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">TikTok</a></li>
+                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">Instagram</a></li>
+                        <li><a href="#" className="hover:text-white hover:pl-2 transition-all">YouTube</a></li>
+                    </ul>
+                </div>
+                <div className="col-span-2 text-right">
+                    <h4 className="text-genz-neon mb-4 font-black">Contact</h4>
+                    <a href="mailto:hello@hillel.media" className="text-2xl md:text-4xl font-black hover:text-genz-pink transition-colors">
+                        HELLO@HILLEL.MEDIA
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <div className="container mx-auto flex justify-between items-end border-t border-white/10 pt-8 text-xs font-mono text-gray-600">
-            <div>
-                &copy; {new Date().getFullYear()} HILLEL MEDIA
-            </div>
-            <div>
-                TEL AVIV &bull; NYC &bull; LDN
-            </div>
-            <div>
-                SCROLL TO TOP
+            <div className="border-t-4 border-white/10 pt-4 flex justify-between items-end">
+                <h1 className="text-[14vw] leading-[0.8] font-black tracking-tighter text-white/5 select-none pointer-events-none">
+                    GAME OVER
+                </h1>
+                <div className="text-xs font-mono text-gray-600 mb-4 text-right hidden md:block">
+                    © {new Date().getFullYear()} HILLEL MEDIA INC.<br/>
+                    ALL RIGHTS RESERVED.<br/>
+                    LEVEL 2024
+                </div>
             </div>
         </div>
     </footer>

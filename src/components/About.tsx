@@ -1,108 +1,82 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Film, Star, CheckCircle2 } from 'lucide-react';
 
 export const About: React.FC = () => {
+  const stats = [
+    { name: "SPEED", val: 95, color: "bg-genz-neon" },
+    { name: "VIRALITY", val: 98, color: "bg-genz-pink" },
+    { name: "RETENTION", val: 92, color: "bg-genz-blue" },
+    { name: "CREATIVITY", val: 88, color: "bg-purple-500" },
+  ];
+
   return (
-    <section id="about" className="py-32 bg-cinematic-black relative overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-cinematic-dark to-transparent z-0 opacity-50" />
-        
+    <section id="about" className="py-32 bg-genz-black relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-            <div className="flex flex-col md:flex-row items-center gap-16">
+            <h2 className="text-6xl md:text-8xl font-black mb-20 text-center glitch-text uppercase" data-text="PLAYER SELECT">
+                PLAYER SELECT
+            </h2>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
                 
-                {/* Image Side */}
+                {/* Character Card */}
                 <motion.div 
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="w-full md:w-1/2 relative"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    className="relative w-full md:w-[400px] border-4 border-genz-neon p-2 bg-black/50 shadow-hard"
                 >
-                    <div className="aspect-[3/4] rounded-sm overflow-hidden border border-white/10 group">
-                        <img 
+                    <div className="absolute top-4 left-4 z-20 bg-genz-neon text-black font-black px-2 py-1">P1</div>
+                    <div className="relative aspect-[3/4] overflow-hidden bg-gray-800 group">
+                         <img 
                             src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop" 
-                            alt="Hillel - Video Editor" 
-                            className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                            alt="Hillel" 
+                            className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                        {/* Glitch Overlay */}
+                        <div className="absolute inset-0 bg-genz-pink mix-blend-color opacity-0 group-hover:opacity-20 transition-opacity" />
                     </div>
-                    {/* Decorative frame */}
-                    <div className="absolute -bottom-4 -right-4 w-full h-full border border-cinematic-gold/20 -z-10" />
-                </motion.div>
-
-                {/* Text Side */}
-                <motion.div 
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="w-full md:w-1/2"
-                >
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-[1px] bg-cinematic-gold"></div>
-                        <h2 className="text-cinematic-gold font-mono tracking-widest uppercase text-sm">The Editor</h2>
-                    </div>
-                    
-                    <h3 className="text-4xl md:text-6xl font-black mb-8 leading-none tracking-tight">
-                        HILLEL <br/>
-                        <span className="text-white/20">BEN-DAVID</span>
-                    </h3>
-                    
-                    <p className="text-gray-400 text-lg leading-relaxed mb-8 font-light max-w-lg">
-                        Cinema isn't just about what you see; it's about what you feel. With over a decade in the cutting room, I specialize in finding the heartbeat of every story.
-                        <br/><br/>
-                        My approach combines technical precision with emotional intuition. Whether it's a high-octane commercial or a slow-burn documentary, I sculpt time and light to create narratives that linger long after the screen goes black.
-                    </p>
-
-                    {/* Stats / Awards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 border-t border-white/10 pt-8">
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 bg-white/5 rounded-full text-cinematic-gold shrink-0">
-                                <Film size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg">200+ Projects</h4>
-                                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Commercials & Docs</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 bg-white/5 rounded-full text-cinematic-gold shrink-0">
-                                <Award size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg">Award Winning</h4>
-                                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Berlin Indie Fest '23</p>
-                            </div>
-                        </div>
-                         <div className="flex items-start gap-4">
-                            <div className="p-3 bg-white/5 rounded-full text-cinematic-gold shrink-0">
-                                <Star size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg">Adobe Certified</h4>
-                                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">Premiere Pro Expert</p>
-                            </div>
-                        </div>
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 bg-white/5 rounded-full text-cinematic-gold shrink-0">
-                                <CheckCircle2 size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-white text-lg">Satisfaction</h4>
-                                <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">100% Client Retention</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="mt-12 opacity-50">
-                        {/* Signature placeholder SVG */}
-                         <svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 30 C 20 20, 40 10, 50 30 S 80 50, 90 30 S 120 10, 140 40" stroke="white" strokeWidth="2" fill="none"/>
-                            <path d="M140 40 L 160 20 L 180 50" stroke="white" strokeWidth="2" fill="none"/>
-                         </svg>
+                    <div className="mt-4 text-center">
+                        <h3 className="text-4xl font-black italic uppercase">HILLEL B.D.</h3>
+                        <p className="font-mono text-genz-neon">LVL. 99 EDITOR</p>
                     </div>
                 </motion.div>
+
+                {/* Stats */}
+                <div className="w-full md:w-1/2 space-y-8">
+                    <div className="bg-white/5 p-8 border border-white/10 backdrop-blur-sm">
+                        <p className="font-mono text-xl md:text-2xl leading-relaxed mb-8 text-white">
+                            "I don't just edit videos. I engineer <span className="text-genz-neon font-bold">DOPAMINE HITS</span>. 
+                            My mission is to turn your raw footage into an algorithmic weapon."
+                        </p>
+                        
+                        <div className="space-y-6">
+                            {stats.map((stat, i) => (
+                                <div key={i}>
+                                    <div className="flex justify-between font-mono font-bold text-sm mb-1">
+                                        <span>{stat.name}</span>
+                                        <span>{stat.val}%</span>
+                                    </div>
+                                    <div className="w-full h-4 bg-gray-800 border border-white/20 skew-x-[-10deg]">
+                                        <motion.div 
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: `${stat.val}%` }}
+                                            transition={{ delay: 0.5 + (i * 0.1), duration: 1 }}
+                                            className={`h-full ${stat.color} shadow-[0_0_10px_currentColor]`}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Accolades */}
+                    <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+                        {['100M+ VIEWS', 'ADOBE CERTIFIED', 'TIKTOK PARTNER'].map((tag, i) => (
+                            <span key={i} className="whitespace-nowrap px-4 py-2 border border-white/30 rounded-full font-mono text-xs uppercase hover:bg-white hover:text-black transition-colors">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
