@@ -18,6 +18,7 @@ import { Socials } from './components/Socials';
 import { Footer } from './components/Footer';
 import { GalleryOverlay } from './components/GalleryOverlay';
 import { ProcessModal } from './components/ProcessModal';
+import { GrainOverlay } from './components/GrainOverlay';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ function App() {
     <>
         <CustomCursor />
         <ScrollProgress />
+        <GrainOverlay />
         
         {loading && <Preloader onComplete={() => setLoading(false)} />}
         

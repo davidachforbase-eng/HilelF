@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SERVICES, CLIENTS } from '../constants';
 import { Layout, Scissors, Palette, Headphones } from 'lucide-react';
+import { TiltCard } from './TiltCard';
 
 const iconMap: Record<string, React.ReactNode> = {
   Layout: <Layout size={32} />,
@@ -27,45 +28,46 @@ export const Services: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="text-5xl font-bold mb-16 text-center">SERVICES</h2>
+        <h2 className="text-5xl font-bold mb-16 text-center glitch-text" data-text="SERVICES">SERVICES</h2>
         
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32 perspective-1000">
           {SERVICES.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="glass-panel p-8 rounded-2xl relative overflow-hidden group h-80 flex flex-col justify-between cursor-pointer"
-            >
-              {/* Background Video on Hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                  <video 
-                    src={videoMap[service.id]} 
-                    className="w-full h-full object-cover" 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
-                  />
-                  <div className="absolute inset-0 bg-black/50" />
-              </div>
+            <TiltCard key={service.id} className="h-full">
+                <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="glass-panel p-8 rounded-2xl relative overflow-hidden group h-80 flex flex-col justify-between cursor-pointer shadow-2xl"
+                >
+                {/* Background Video on Hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
+                    <video 
+                        src={videoMap[service.id]} 
+                        className="w-full h-full object-cover" 
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline 
+                    />
+                    <div className="absolute inset-0 bg-black/50" />
+                </div>
 
-              <div className="relative z-10 text-cinematic-gold mb-4 group-hover:scale-110 transition-transform duration-300 origin-left">
-                {iconMap[service.icon]}
-              </div>
-              
-              <div className="relative z-10">
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-cinematic-gold transition-colors">
-                    {service.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                    {service.description}
-                </p>
-              </div>
-            </motion.div>
+                <div className="relative z-10 text-cinematic-gold mb-4 group-hover:scale-110 transition-transform duration-300 origin-left">
+                    {iconMap[service.icon]}
+                </div>
+                
+                <div className="relative z-10">
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-cinematic-gold transition-colors">
+                        {service.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                        {service.description}
+                    </p>
+                </div>
+                </motion.div>
+            </TiltCard>
           ))}
         </div>
 

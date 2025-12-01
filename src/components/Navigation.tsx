@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Magnetic } from './Magnetic';
+import { SoundControl } from './SoundControl';
 
 interface NavigationProps {
   onOpenGallery: () => void;
@@ -53,32 +55,39 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenGallery, onOpenPro
         }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Logo */}
-          <div 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 group"
-          >
-            <span className="text-white group-hover:text-cinematic-gold transition-colors">HILLEL</span>
-            <span className="w-2 h-2 rounded-full bg-cinematic-red"></span>
+          {/* Logo & Sound */}
+          <div className="flex items-center gap-8">
+            <div 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2 group z-50 relative"
+            >
+                <span className="text-white group-hover:text-cinematic-gold transition-colors">HILLEL</span>
+                <span className="w-2 h-2 rounded-full bg-cinematic-red animate-pulse"></span>
+            </div>
+            
+            <div className="hidden md:block">
+                <SoundControl />
+            </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => handleLinkClick(link.id)}
-                className="text-sm font-mono font-bold text-white/70 hover:text-white hover:text-cinematic-gold transition-colors tracking-widest relative group"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-cinematic-gold transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              <Magnetic key={link.name}>
+                <button
+                    onClick={() => handleLinkClick(link.id)}
+                    className="text-sm font-mono font-bold text-white/70 hover:text-white hover:text-cinematic-gold transition-colors tracking-widest relative group px-2 py-4"
+                >
+                    {link.name}
+                    <span className="absolute bottom-2 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-cinematic-gold transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              </Magnetic>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-white relative z-50"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
