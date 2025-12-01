@@ -24,6 +24,7 @@ export const Navigation: React.FC = () => {
 
   const navLinks = [
     { name: 'WORK', id: 'work' },
+    { name: 'ABOUT', id: 'about' },
     { name: 'PROCESS', id: 'process' },
     { name: 'SERVICES', id: 'services' },
     { name: 'REVIEWS', id: 'reviews' },

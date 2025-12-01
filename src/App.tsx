@@ -4,6 +4,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { Showreel } from './components/Showreel';
+import { About } from './components/About';
 import { Process } from './components/Process';
 import { Services } from './components/Services';
 import { Testimonials } from './components/Testimonials';
@@ -32,6 +33,7 @@ function App() {
             <Navigation />
             <Hero />
             <Showreel />
+            <About />
             <Process />
             <Services />
             <Testimonials />
